@@ -1,13 +1,5 @@
-import * as express from 'express';
+import App from './app';
 
-const app = express();
+const app = new App();
 
-const PORT = 8080;
-
-app.get('/', (req, res) => {
-  res.send('Send sucess');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running at ${PORT}`);
-});
+app.start();
