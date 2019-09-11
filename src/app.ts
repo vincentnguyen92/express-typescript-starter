@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
 import { router } from './router';
-import { requestLoggerMiddleware } from './middlewares/requestLoggerMiddleware';
+import { RequestLogger } from './Middleware/RequestLogger';
 
 class Application {
   app: express.Application;
@@ -26,7 +26,7 @@ class Application {
   }
 
   middlewares() {
-    this.app.use(requestLoggerMiddleware);
+    this.app.use(RequestLogger);
     this.app.use(express.urlencoded({extended: false}));
     this.app.use(express.json());
     this.app.use(cors());

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Controller } from './config/helpers';
+import { Controller } from '../helper';
 
 const router = Router();
 

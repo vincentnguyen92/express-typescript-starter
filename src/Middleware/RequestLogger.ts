@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-function requestLoggerMiddleware (req: express.Request, res: express.Response, next: express.NextFunction) {
+function RequestLogger (req: express.Request, res: express.Response, next: express.NextFunction) {
   const start = new Date().getTime();
   
   res.on('finish', () => {
@@ -11,4 +11,4 @@ function requestLoggerMiddleware (req: express.Request, res: express.Response, n
   next();
 }
 
-export { requestLoggerMiddleware };
+export { RequestLogger };
