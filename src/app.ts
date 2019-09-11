@@ -2,16 +2,16 @@ import * as express from 'express';
 import * as http from 'http';
 import * as cors from 'cors';
 import * as mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
 
 import { router } from './router';
 import { requestLoggerMiddleware } from './middlewares/requestLoggerMiddleware';
 
 class Application {
   app: express.Application;
-  PORT = 8080;
-  MONGO_URI = 'mongodb://localhost:27017/demo';
 
   constructor() {
+    dotenv.config();
     this.app = express();
 
     this.settings();
@@ -20,12 +20,12 @@ class Application {
   }
 
   settings() {
-    this.app.set('port', this.PORT);
+    this.app.set('port', process.env.APP_PORT);
+    this.app.set('mongo_uri', process.env.MONGO_URI);
     this.app.disable('x-powered-by');
   }
 
   middlewares() {
-    console.log(`Load middleware success`);
     this.app.use(requestLoggerMiddleware);
     this.app.use(express.urlencoded({extended: false}));
     this.app.use(express.json());
@@ -33,7 +33,6 @@ class Application {
   }
 
   routes() {
-    console.log(`Load router success`);
     this.app.use(router);
   }
 
@@ -41,10 +40,10 @@ class Application {
     const server = http.createServer(this.app);
 
     server.listen(this.app.get('port'));
-    server.on('listening', () => {
+    server.on('listening', async () => {
       console.log(`Server is running at ${this.app.get('port')}`);
 
-      mongoose.connect(this.MONGO_URI, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
+      mongoose.connect(this.app.get('mongo_uri'), { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
       mongoose.connection.on('open', () => {
         console.info('Connected to Mongo.');
       });
