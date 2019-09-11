@@ -8,6 +8,7 @@ class Application {
 
   constructor() {
     this.app = express();
+
     this.settings();
     this.middlewares();
     this.routes();
@@ -15,6 +16,7 @@ class Application {
 
   settings() {
     this.app.set('port', 8080);
+    this.app.disable('x-powered-by');
   }
 
   middlewares() {
