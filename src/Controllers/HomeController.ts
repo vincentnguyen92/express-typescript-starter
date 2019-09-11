@@ -7,10 +7,6 @@ class HomeController {
       action: 'Index'
     });
   }
-
-  demo(req: Request, res: Response) {
-    res.send(req.params);
-  }
 }
 
 export default HomeController;
