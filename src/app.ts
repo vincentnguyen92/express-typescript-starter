@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors';
 import { router } from './router';
+import { requestLoggerMiddleware } from './middlewares/requestLoggerMiddleware';
 
 class Application {
   app: express.Application;
@@ -18,6 +19,7 @@ class Application {
 
   middlewares() {
     console.log(`Load middleware success`);
+    this.app.use(requestLoggerMiddleware);
     this.app.use(express.urlencoded({extended: false}));
     this.app.use(express.json());
     this.app.use(cors());
