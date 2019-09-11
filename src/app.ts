@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as cors from 'cors';
+import { router } from './router';
 
 class Application {
   app: express.Application;
@@ -16,13 +17,15 @@ class Application {
   }
 
   middlewares() {
+    console.log(`Load middleware success`);
     this.app.use(express.urlencoded({extended: false}));
     this.app.use(express.json());
     this.app.use(cors());
   }
 
   routes() {
-    console.log(`Routing here`);
+    console.log(`Load router success`);
+    this.app.use(router);
   }
 
   start() {
@@ -32,4 +35,4 @@ class Application {
   }
 }
 
-export default Application;
+export { Application };
