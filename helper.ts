@@ -1,7 +1,7 @@
 function Controller(str : String) {
   const arrInput = str.split('@');
-  const _ObjController = require(`./src/Controllers/${arrInput[0]}`).default;
-  const funController = new _ObjController();
+  const objController = require(`./src/Controllers/${arrInput[0]}`).default;
+  const funController = new objController();
   
   return funController[arrInput[1]];
 }
