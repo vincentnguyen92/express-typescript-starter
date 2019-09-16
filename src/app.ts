@@ -3,7 +3,6 @@ import "reflect-metadata";
 import * as express from 'express';
 import * as http from 'http';
 import * as cors from 'cors';
-import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
 import { router } from './router';
@@ -15,6 +14,7 @@ class Application {
 
   constructor() {
     dotenv.config();
+
     this.app = express();
     this.connection();
 
