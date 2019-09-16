@@ -24,7 +24,6 @@ class Application {
   }
 
   connection() {
-    console.log('I am a connection database');
     // connection settings are in the "ormconfig.json" file
     createConnection().then(async connection => {
       console.log('Connect database success');
