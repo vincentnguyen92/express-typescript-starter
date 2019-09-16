@@ -6,10 +6,9 @@ import * as cors from 'cors';
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
-import {createConnection} from "typeorm";
-
 import { router } from './router';
 import { RequestLogger } from './Middleware/RequestLogger';
+import { createConnection } from "typeorm";
 
 class Application {
   app: express.Application;
@@ -17,10 +16,19 @@ class Application {
   constructor() {
     dotenv.config();
     this.app = express();
+    this.connection();
 
     this.settings();
     this.middlewares();
     this.routes();
+  }
+
+  connection() {
+    console.log('I am a connection database');
+    // connection settings are in the "ormconfig.json" file
+    createConnection().then(async connection => {
+      console.log('Connect database success');
+    }).catch(error => console.log("Error: ", error));
   }
 
   settings() {
@@ -46,10 +54,6 @@ class Application {
     server.listen(this.app.get('port'));
     server.on('listening', async () => {
       console.log(`Server is running at ${this.app.get('port')}`);
-      // connection settings are in the "ormconfig.json" file
-      createConnection().then(async connection => {
-        console.log("Connect success to database");
-      }).catch(error => console.log("Error: ", error));
     });
   }
 }

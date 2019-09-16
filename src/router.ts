@@ -5,4 +5,6 @@ const router = Router();
 
 router.get('/', Middleware('Test'), Controller('HomeController@index'));
 
+router.get('/post', Controller('PostController@index'));
+
 export { router };
