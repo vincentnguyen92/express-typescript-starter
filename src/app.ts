@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import * as express from 'express';
 import * as http from 'http';
 import * as cors from 'cors';
