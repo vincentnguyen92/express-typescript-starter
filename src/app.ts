@@ -1,9 +1,12 @@
 import "reflect-metadata";
+
 import * as express from 'express';
 import * as http from 'http';
 import * as cors from 'cors';
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
+
+import {createConnection} from "typeorm";
 
 import { router } from './router';
 import { RequestLogger } from './Middleware/RequestLogger';
@@ -43,14 +46,10 @@ class Application {
     server.listen(this.app.get('port'));
     server.on('listening', async () => {
       console.log(`Server is running at ${this.app.get('port')}`);
-
-      mongoose.connect(this.app.get('mongo_uri'), { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true});
-      mongoose.connection.on('open', () => {
-        console.info('Connected to Mongo.');
-      });
-      mongoose.connection.on('error', (err: any) => {
-        console.error(err);
-      });
+      // connection settings are in the "ormconfig.json" file
+      createConnection().then(async connection => {
+        console.log("Connect success to database");
+      }).catch(error => console.log("Error: ", error));
     });
   }
 }
