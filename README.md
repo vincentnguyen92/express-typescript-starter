@@ -5,7 +5,7 @@ This is a straightforward boilerplate for building REST APIs with Typescript, Ty
 ## How to use
 
 ```sh
-# clone it
+# Clone it
 git clone git@github.com:vincentnguyen92/express-typescript-starter.git
 cd express-typescript-starter
 
@@ -31,6 +31,6 @@ docker build -t express-starter .
 #            ^      ^           ^
 #          tag  tag name      Dockerfile location
 
-# run your docker
+# Run your docker
 docker run -p 8080:8080 -v /$(pwd)/:/usr/src/app express-starter
 ```
